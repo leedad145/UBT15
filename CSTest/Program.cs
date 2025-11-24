@@ -7,8 +7,6 @@ class Program
         //FloatDouble.RunTest();
         //CharString.RunTest();
         //Read.RunTest();
-        int i = int.MaxValue;
-        long l = long.MaxValue;
-        Console.WriteLine($"{i}, {l}");
+        //Homework1.RunTest();
     }
 }
