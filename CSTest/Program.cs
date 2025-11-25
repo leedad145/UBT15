@@ -8,5 +8,8 @@ class Program
         //CharString.RunTest();
         //Read.RunTest();
         //Homework1.RunTest();
+        //RPS.RunTest();
+        //StarTree.RunTest();
+        OddEven.RunTest();
     }
 }
