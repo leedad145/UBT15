@@ -1,24 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\UBT15\\CSTest\\CSTest.csproj": {}
+    "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {}
   },
   "projects": {
-    "C:\\UBT15\\CSTest\\CSTest.csproj": {
+    "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UBT15\\CSTest\\CSTest.csproj",
+        "projectUniqueName": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
         "projectName": "CSTest",
-        "projectPath": "C:\\UBT15\\CSTest\\CSTest.csproj",
-        "packagesPath": "C:\\Users\\ljy12\\.nuget\\packages\\",
-        "outputPath": "C:\\UBT15\\CSTest\\obj\\",
+        "projectPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
+        "packagesPath": "C:\\Users\\Monstera\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ljy12\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Monstera\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
         "frameworks": {
           "net10.0": {
             "targetAlias": "net10.0",
