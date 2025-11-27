@@ -14,12 +14,6 @@ class Program
         //RPS.RunTest();
         //StarTree.RunTest();
         //OddEven.RunTest();
-        char[] a = {'a','b','c'};
-        string b = "abc";
-        Console.WriteLine(string.Empty == "");
-        Console.WriteLine(string.Empty == "\0");
-        a[1] = 'd';
-        Console.WriteLine(a);
-        Console.WriteLine(b);
+        
     }
 }
