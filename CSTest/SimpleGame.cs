@@ -1,4 +1,4 @@
-class SimpleGame
+public class SimpleGame
 {
     enum ClassType
     {
@@ -7,7 +7,47 @@ class SimpleGame
         Mage,
         Rogue
     }
+    enum ClassMonster
+    {
+        None,
+        Slime,
+        Orc,
+        Skeleton
+    }
+    struct Player
+    {
+        public int hp;
+        public int atk;
+    }
 
+    struct Monster
+    {
+        public int hp;
+        public int atk;
+    }
+
+    static public void RunTest()
+    {
+        ClassType choice = ClassType.None;
+
+        Player player;
+
+        while (true)
+        {
+            choice = ClassChoice();
+            if (choice != ClassType.None)
+            {
+                CreatePlayer(choice, out player);
+
+                Console.WriteLine($"HP {player.hp}, ATK {player.atk}");
+
+                Monster monster;
+                CreateRandomMonster(out monster);
+                Console.WriteLine($"HP {monster.hp}, ATK {monster.atk}");
+            }
+        }
+    }
+    
     static ClassType ClassChoice()
     {
         Console.WriteLine("직업을 선택하세요!");
@@ -34,46 +74,53 @@ class SimpleGame
         return choice;
     }
 
-    static void CreatePlayer(ClassType choice, out int hp, out int atk)
+    static void CreatePlayer(ClassType choice, out Player player)
     {
         switch(choice) // 기사(100/10), 마법사(50/15), 도둑(75/12)
         {
             case ClassType.Knight:
-                hp = 100;
-                atk = 10;
+                player.hp = 100;
+                player.atk = 10;
                 break;
             case ClassType.Mage:
-                hp = 50;
-                atk = 15;
+                player.hp = 50;
+                player.atk = 15;
                 break;
             case ClassType.Rogue:
-                hp = 75;
-                atk = 12;
+                player.hp = 75;
+                player.atk = 12;
                 break;
             default:
-                hp = 0;
-                atk = 0;
-                Console.WriteLine($"입력범위를 벗어났습니다. 입력값: {choice}");
+                player.hp = 0;
+                player.atk = 0;
                 break;
         }
     }
-
-    static void RunTest()
+    static void CreateRandomMonster(out Monster monster)
     {
-        ClassType choice = ClassType.None;
-
-        while (true)
+        Random rand = new Random();
+        ClassMonster monsterChoice = (ClassMonster)rand.Next(1, 4); // 1 ~ 3 의 랜덤 값을 넣어짐
+        Console.WriteLine($"선택된 몬스터: {monsterChoice}");
+        switch (monsterChoice) // Slime(20/2), Orc(40/4), Skeleton(30/3)
         {
-            choice = ClassChoice();
-            if (choice != ClassType.None)
-            {
-                // 캐릭터 생성
-                int hp;
-                int atk;
-                CreatePlayer(choice, out hp, out atk);
-
-                Console.WriteLine($"HP {hp}, ATK {atk}");
-            }
+            case ClassMonster.Slime:
+                monster.hp = 20;
+                monster.atk = 2;
+                break;
+            case ClassMonster.Orc:
+                monster.hp = 40;
+                monster.atk = 4;
+                break;
+            case ClassMonster.Skeleton:
+                monster.hp = 30;
+                monster.atk = 3;
+                break;
+            default:
+                monster.hp = 0;
+                monster.atk = 0;
+                break;
         }
     }
 }
+
+

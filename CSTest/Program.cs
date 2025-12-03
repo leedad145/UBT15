@@ -22,5 +22,6 @@ class Program
         //NumSwap.RunTest();
         //Recursive.RunTest();
         //OOP.RunTest();
+        SimpleGame.RunTest();
     }
 }
