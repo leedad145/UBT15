@@ -7,7 +7,14 @@ using System.Runtime.CompilerServices;
 //구글드라이브
 //https://drive.google.com/drive/folders/1xP_gRcH-dhrZyV2zBjc1f_eEOVFrEOrF?dmr=1&ec=wgc-drive-globalnav-goto
 class Program
-{
+{   
+    enum Season
+    {
+        Spring,
+        Sommer,
+        Automn,
+        Winter
+    }
     static void Main()
     {
         //FloatDouble.RunTest();
@@ -17,6 +24,20 @@ class Program
         //RPS.RunTest();
         //StarTree.RunTest();
         //OddEven.RunTest();
+        //EnumDonversionExample.RunTest();
+        //Console.WriteLine($"{Season.Spring}, {Season .Automn}");
+        int a = 10;
+        int b = 20;
+        Console.Write($"{a}, {b} -(Swap)-> ");
 
+        Swap(ref a, ref b);
+
+        Console.WriteLine($"{a}, {b}");
+    }
+    static void Swap(ref int a, ref int b)
+    {
+        int c = a;
+        a = b;
+        b = c;
     }
 }
