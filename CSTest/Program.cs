@@ -8,13 +8,6 @@ using System.Runtime.CompilerServices;
 //https://drive.google.com/drive/folders/1xP_gRcH-dhrZyV2zBjc1f_eEOVFrEOrF?dmr=1&ec=wgc-drive-globalnav-goto
 class Program
 {   
-    enum Season
-    {
-        Spring,
-        Sommer,
-        Automn,
-        Winter
-    }
     static void Main()
     {
         //FloatDouble.RunTest();
@@ -27,6 +20,7 @@ class Program
         //EnumDonversionExample.RunTest();
         //Console.WriteLine($"{Season.Spring}, {Season .Automn}");
         //NumSwap.RunTest();
-        Recursive.RunTest();
+        //Recursive.RunTest();
+        //OOP.RunTest();
     }
 }

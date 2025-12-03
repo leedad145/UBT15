@@ -8,7 +8,6 @@ public class Recursive
     {
         if ( start <= end)
             return Sum(start + 1, end) + start;
-        else
-            return 0;
+        return 0;
     }
 }
