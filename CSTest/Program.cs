@@ -26,18 +26,6 @@ class Program
         //OddEven.RunTest();
         //EnumDonversionExample.RunTest();
         //Console.WriteLine($"{Season.Spring}, {Season .Automn}");
-        int a = 10;
-        int b = 20;
-        Console.Write($"{a}, {b} -(Swap)-> ");
-
-        Swap(ref a, ref b);
-
-        Console.WriteLine($"{a}, {b}");
-    }
-    static void Swap(ref int a, ref int b)
-    {
-        int c = a;
-        a = b;
-        b = c;
+        NumSwap.RunTest();
     }
 }
