@@ -26,6 +26,7 @@ class Program
         //OddEven.RunTest();
         //EnumDonversionExample.RunTest();
         //Console.WriteLine($"{Season.Spring}, {Season .Automn}");
-        NumSwap.RunTest();
+        //NumSwap.RunTest();
+        Recursive.RunTest();
     }
 }

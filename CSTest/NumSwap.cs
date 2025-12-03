@@ -12,8 +12,8 @@ public class NumSwap
     }
     static void Swap(ref int a, ref int b)
     {
-        int c = a;
+        int temp = a;
         a = b;
-        b = c;
+        b = temp;
     }
 }
