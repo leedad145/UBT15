@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-
+/*
 public class OOP
 {
     // 추상화: 공통 속성을 뽑아서 하나의 개념으로 묶는 것
@@ -45,3 +45,4 @@ class Mage : Player
         Console.WriteLine("메이지 스킬");
     }
 }
+*/
