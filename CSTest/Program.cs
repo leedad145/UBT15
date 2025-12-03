@@ -18,11 +18,13 @@ class Program
         //StarTree.RunTest();
         //OddEven.RunTest();
         //EnumDonversionExample.RunTest();
-        //Console.WriteLine($"{Season.Spring}, {Season .Automn}");
         //NumSwap.RunTest();
         //Recursive.RunTest();
         //OOP.RunTest();
         //SimpleGame.RunTest();
-        Wizard wizard = new Wizard();
+        //Wizard wizard = new Wizard();
+        Dog dog = new Dog("댕댕");
+        Cat cat = new Cat("나비");
+        Cow cow = new Cow("해피카우");
     }
 }

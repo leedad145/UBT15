@@ -1,4 +1,4 @@
-class Wizard
+public class Wizard
 {
     // =======================================
     // 1. Wizard 클래스를 만들어 다음 조건을 만족하세요:
