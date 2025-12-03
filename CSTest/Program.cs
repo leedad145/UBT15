@@ -22,6 +22,7 @@ class Program
         //NumSwap.RunTest();
         //Recursive.RunTest();
         //OOP.RunTest();
-        SimpleGame.RunTest();
+        //SimpleGame.RunTest();
+        Wizard wizard = new Wizard();
     }
 }

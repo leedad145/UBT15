@@ -76,7 +76,7 @@ public class SimpleGame
 
     static void CreatePlayer(ClassType choice, out Player player)
     {
-        switch(choice) // 기사(100/10), 마법사(50/15), 도둑(75/12)
+        switch(choice) // Knight(100/10), Mage(50/15), Rogue(75/12)
         {
             case ClassType.Knight:
                 player.hp = 100;
@@ -100,7 +100,6 @@ public class SimpleGame
     {
         Random rand = new Random();
         ClassMonster monsterChoice = (ClassMonster)rand.Next(1, 4); // 1 ~ 3 의 랜덤 값을 넣어짐
-        Console.WriteLine($"선택된 몬스터: {monsterChoice}");
         switch (monsterChoice) // Slime(20/2), Orc(40/4), Skeleton(30/3)
         {
             case ClassMonster.Slime:
