@@ -25,6 +25,5 @@ public class Square : MonoBehaviour
         sr.color = color;
         go.name = name;
         go.transform.position = pos;
-
     }
 }
