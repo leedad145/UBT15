@@ -33,7 +33,7 @@ public class ConsoleRPG
             Console.WriteLine($"현재 경험치: {player.Exp}");
 
             Console.WriteLine("계속 싸우시겠습니까?(y/n): ");
-            isFight = Console.ReadLine() == "y" ? true : false;
+            isFight = Console.ReadLine()?.Trim().ToLower() == "y" ? true : false;
         }
         
     }
