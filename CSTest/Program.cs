@@ -23,8 +23,6 @@ class Program
         //OOP.RunTest();
         //SimpleGame.RunTest();
         //Wizard wizard = new Wizard();
-        Dog dog = new Dog("댕댕");
-        Cat cat = new Cat("나비");
-        Cow cow = new Cow("해피카우");
+        ConsoleRPG.RunTest();
     }
 }
