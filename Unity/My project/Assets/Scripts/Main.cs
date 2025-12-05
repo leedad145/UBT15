@@ -1,28 +1,23 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
-{//7개 생성 이름변경 스프라이트렌더러 스프라트드 스퀘어
+{
+    //GameObject prefab;
     private void Start()
-    { 
-
+    {
+        
     }
 
-    float sumTime = 0f; // 시간을 누적 시킬 변수
     private void Update()
     {
-        sumTime += Time.deltaTime;
-        GameObject go = GameObject.Find("Player");
-        if(sumTime >= 3.0f)
+        if (Input.GetAxis("Horizontal") != 0)
         {
-            go.SetActive(false);
-            GameObject.Destroy(go, 2);
+            Debug.Log("Down");
+        }
+        if (Input.GetAxis("vertical") != 0)
+        {
+            Debug.Log("--");
         }
     }
-    private void CreatePlayer()
-    {
-        GameObject go = new GameObject();
-        Player player =  go.AddComponent<Player>();
-    }
-
 }

@@ -10,19 +10,19 @@ class Program
 {   
     static void Main()
     {
-        //FloatDouble.RunTest();
-        //CharString.RunTest();
-        //Read.RunTest();
-        //Homework1.RunTest();
-        //RPS.RunTest();
-        //StarTree.RunTest();
-        //OddEven.RunTest();
-        //EnumDonversionExample.RunTest();
-        //NumSwap.RunTest();
-        //Recursive.RunTest();
-        //OOP.RunTest();
-        //SimpleGame.RunTest();
-        //Wizard wizard = new Wizard();
-        ConsoleRPG.RunTest();
+        Console.Write(Solution.solution("3141592", "271"));
+
     }
+public class Solution {
+    static public int solution(string t, string p) {
+        int answer = 0;
+        
+        for(int i = 0; i < t.Length - p.Length; i++)
+        {
+            if (int.Parse(p) >= int.Parse(t[i..(i+p.Length)]))
+                answer++;
+        }
+        return answer;
+    }
+}
 }
