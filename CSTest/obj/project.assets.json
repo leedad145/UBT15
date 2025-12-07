@@ -8,26 +8,24 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Monstera\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
+      "projectUniqueName": "C:\\Unity\\UBT15\\CSTest\\CSTest.csproj",
       "projectName": "CSTest",
-      "projectPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
-      "packagesPath": "C:\\Users\\Monstera\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\obj\\",
+      "projectPath": "C:\\Unity\\UBT15\\CSTest\\CSTest.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Unity\\UBT15\\CSTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Monstera\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

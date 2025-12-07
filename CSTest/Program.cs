@@ -10,19 +10,25 @@ class Program
 {   
     static void Main()
     {
-        Console.Write(Solution.solution("3141592", "271"));
+        MyList<int> ints = new MyList<int>();
 
+        ints.Add(1);
+        ints.Add(2);
+        ints.Add(3);
+        ints.Add(4);
+        ints.Add(5);
+        ints.RemoveAt(2);
+        ints.RemoveAt(2);
+        ints.Add(2);
+        ints.Add(4);
+        Console.WriteLine(ints[0]);
+        Console.WriteLine(ints[1]);
+        Console.WriteLine(ints[2]);
+        Console.WriteLine(ints[3]);
+        Console.WriteLine(ints[4]);
+        Console.WriteLine(ints[5]);
+        Console.WriteLine(ints[6]);
+        Console.WriteLine(ints[7]);
+        Console.WriteLine(ints[8]);
     }
-public class Solution {
-    static public int solution(string t, string p) {
-        int answer = 0;
-        
-        for(int i = 0; i < t.Length - p.Length; i++)
-        {
-            if (int.Parse(p) >= int.Parse(t[i..(i+p.Length)]))
-                answer++;
-        }
-        return answer;
-    }
-}
 }
