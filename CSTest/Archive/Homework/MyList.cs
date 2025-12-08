@@ -14,13 +14,16 @@ public class MyList<T>
                 return arr[index];   
             }
             Console.Write("index범위 초과 ");
+
+#pragma warning disable CS8603 // 가능한 null 참조 반환입니다.
             return default;
+#pragma warning restore CS8603 // 가능한 null 참조 반환입니다.
         }
         set
         {
             if(0 <= index && index < length)
-            { 
-                arr[index] = value; 
+            {
+                arr[index] = value;
             }
         }
     }
@@ -47,3 +50,60 @@ public class MyList<T>
         }
     }
 }
+/*
+public class MyLinkedList<T>
+{
+    T val;
+    int length = 0; // LinkedList에 등록된 실제 데이터 길이
+    MyLinkedList<T> link;
+     public T this[int index]
+    {
+        get
+        {
+            if(0 <= index && index < length)
+            {
+                MyLinkedList<T> temp = link;
+                for(int i = 0; i < index; i++)
+                {
+                    temp = temp.link;
+                }
+                return temp.val;
+            }
+            Console.Write("index범위 초과 ");
+            return default;
+        }
+        set
+        {
+            if(0 <= index && index < length)
+            { 
+                MyLinkedList<T> temp = link;
+                for(int i = 0; i < index; i++)
+                {
+                    temp = temp.link;
+                }
+                temp.val = value; 
+            }
+        }
+    }
+    public void Add(T val)
+    {
+        length++;
+        MyLinkedList<T> Temp = link;
+        for(int i = 0; i < length - 1; i++)
+        {
+            Temp = Temp.link;
+        }
+        Temp.link.val = val;
+    }
+    public void RemoveAt(int index)
+    {
+        MyLinkedList<T> Temp = link;
+        for(int i = 0; i < index - 1; i++)
+        {
+            Temp = Temp.link;
+        }
+        Temp = Temp.link.link;
+        length--;
+    }
+}
+*/

@@ -10,25 +10,21 @@ class Program
 {   
     static void Main()
     {
-        MyList<int> ints = new MyList<int>();
+        clsGraph graph = new clsGraph(4);
+        graph.AddEdge(0, 1);
+        graph.AddEdge(0, 2);
+        graph.AddEdge(1, 2);
+        graph.AddEdge(2, 0);
+        graph.AddEdge(2, 3);
+        graph.AddEdge(3, 3);
 
-        ints.Add(1);
-        ints.Add(2);
-        ints.Add(3);
-        ints.Add(4);
-        ints.Add(5);
-        ints.RemoveAt(2);
-        ints.RemoveAt(2);
-        ints.Add(2);
-        ints.Add(4);
-        Console.WriteLine(ints[0]);
-        Console.WriteLine(ints[1]);
-        Console.WriteLine(ints[2]);
-        Console.WriteLine(ints[3]);
-        Console.WriteLine(ints[4]);
-        Console.WriteLine(ints[5]);
-        Console.WriteLine(ints[6]);
-        Console.WriteLine(ints[7]);
-        Console.WriteLine(ints[8]);
+        // BFS 실행 (시작 노드: 2)
+        // 예상 결과: 2 0 3 1
+        graph.BFS(2);
+
+        // DFS 실행 (시작 노드: 2)
+        // (스택에 0과 3이 Push될 때 3이 먼저 Pop되어 탐색될 수 있음)
+        // 예상 결과 (출력 순서에 따라 다를 수 있음): 2 3 0 1
+        graph.DFS(2);
     }
 }
