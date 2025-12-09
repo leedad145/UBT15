@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 {
     Animator animator;
     SpriteRenderer spriteRenderer;
-    float time = 0;
     [SerializeField]
     float speed = 10f;
     Dir _dir;
@@ -40,21 +39,21 @@ public class Player : MonoBehaviour
     }
     void UpdateInput()
     {
-        time = Time.deltaTime;
-        
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Attack
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
             _state = State.Attack;
             return;
         }
 
+        // Walk
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
         Vector3 inputVector = new Vector3(inputX, inputY);
         if (inputVector.magnitude > 0)
         {
             Vector3 direction = inputVector.normalized;
-
+            PlayerWalk(direction);
             if (direction == Vector3.up)
             {
                 _dir = Dir.Up;
@@ -66,15 +65,11 @@ public class Player : MonoBehaviour
             else if (direction == Vector3.left)
             {
                 _dir = Dir.Left;
-                spriteRenderer.flipX = true;
             }
             else if (direction == Vector3.right)
             {
                 _dir = Dir.Right;
-                spriteRenderer.flipX = false;
             }
-            _state = State.Walk;
-            transform.position += direction * speed * time;
         }
         else
         {
@@ -82,19 +77,29 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void UpdateAnimation()
     {
-        if (_dir == Dir.Right || _dir == Dir.Left)
+        if (_dir == Dir.Left)
         {
+            spriteRenderer.flipX = true;
             animator.Play($"Side{_state}");
         }
-        else 
+        else if(_dir == Dir.Right)
+        {
+            spriteRenderer.flipX = false;
+            animator.Play($"Side{_state}");
+        }
+        else
         {
             animator.Play($"{_dir}{_state}");
         }
     }
 
+    void PlayerWalk(Vector3 dir)
+    {
+        _state = State.Walk;
+        transform.position += dir * speed * Time.deltaTime;
+    }
     void OnAttackEnded()
     {
         _state = State.Idle;
