@@ -4,7 +4,8 @@ enum Dir
 {
     Up,
     Down,
-    Side,
+    Left,
+    Right,
 }
 enum State
 {
@@ -37,44 +38,54 @@ public class Player : MonoBehaviour
     void UpdateInput()
     {
         time = Time.deltaTime;
-        float px = Input.GetAxisRaw("Horizontal");
-        float py = Input.GetAxisRaw("Vertical");
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+        Vector3 inputVector = new Vector3(inputX, inputY);
 
-        if (py > 0)
+        if (inputVector.magnitude > 0)
         {
+            Vector3 direction = inputVector.normalized;
             _state = State.Walk;
-            _dir = Dir.Up;
-        }
-        else if (py < 0)
-        {
-            _state = State.Walk;
-            _dir = Dir.Down;
-        }
-        else if (px > 0)
-        {
-            _state = State.Walk;
-            _dir = Dir.Side;
-            spriteRenderer.flipX = false;
-        }
-        else if (px < 0)
-        {
-            _state = State.Walk;
-            _dir = Dir.Side;
-            spriteRenderer.flipX = true;
+
+            if (direction == Vector3.up)
+            {
+                _dir = Dir.Up;
+            }
+            else if (direction == Vector3.down)
+            {
+                _dir = Dir.Down;
+            }
+            else if (direction == Vector3.left)
+            {
+                _dir = Dir.Left;
+                spriteRenderer.flipX = true;
+            }
+            else if (direction == Vector3.right)
+            {
+                _dir = Dir.Right;
+                spriteRenderer.flipX = false;
+            }
+
+            transform.position += direction * speed * time;
         }
         else
         {
             _state = State.Idle;
         }
-        Vector3 direction = new Vector3(px, py, 0).normalized;
 
-        transform.position += direction * speed * time;
         time = 0;
     }
 
 
     void UpdateAnimation()
     {
-        animator.Play($"{_dir}{_state}");
+        if (_dir == Dir.Right || _dir == Dir.Left)
+        {
+            animator.Play($"{_dir}Side");
+        }
+        else 
+        {
+            animator.Play($"{_dir}{_state}");
+        }
     }
 }
