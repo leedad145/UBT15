@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+//제미나이 코드
 public class clsGraph
 {
     private int Vertices; // 정점(Vertex)의 수
