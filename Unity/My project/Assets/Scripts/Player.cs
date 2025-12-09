@@ -32,7 +32,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        UpdateInput();
+        if (_state != State.Attack)
+        {
+            UpdateInput();
+        }
         UpdateAnimation();
     }
     void UpdateInput()
@@ -41,15 +44,6 @@ public class Player : MonoBehaviour
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
         Vector3 inputVector = new Vector3(inputX, inputY);
-        if (_state != State.Attack)
-        {
-            UpdatePos(inputVector);
-        }
-
-        time = 0;
-    }
-    void UpdatePos(Vector3 inputVector)
-    {
         if (inputVector.magnitude > 0)
         {
             Vector3 direction = inputVector.normalized;
@@ -86,7 +80,9 @@ public class Player : MonoBehaviour
                 _state = State.Idle;
             }
         }
+        time = 0;
     }
+
 
     void UpdateAnimation()
     {
