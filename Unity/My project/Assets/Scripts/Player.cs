@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
         {
             _state = State.Idle;
         }
-        time = 0;
     }
 
 
