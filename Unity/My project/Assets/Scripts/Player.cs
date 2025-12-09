@@ -1,67 +1,80 @@
 using UnityEngine;
 
+enum Dir 
+{
+    Up,
+    Down,
+    Side,
+}
+enum State
+{
+    Idle,
+    Walk,
+    Attack,
+}
+
+
 public class Player : MonoBehaviour
 {
-    public float speed = 15.0f;
-
+    Animator animator;
+    SpriteRenderer spriteRenderer;
+    float time = 0;
+    [SerializeField]
+    float speed = 10f;
+    Dir _dir;
+    State _state;
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
     void Update()
     {
-        float moveDistance = speed * Time.deltaTime;
-        Vector3 moveDirection = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
+        UpdateInput();
+        UpdateAnimation();
+    }
+    void UpdateInput()
+    {
+        time = Time.deltaTime;
+        float px = Input.GetAxisRaw("Horizontal");
+        float py = Input.GetAxisRaw("Vertical");
+
+        if (py > 0)
         {
-            moveDirection += Vector3.up;
+            _state = State.Walk;
+            _dir = Dir.Up;
         }
-        if (Input.GetKey(KeyCode.A))
+        else if (py < 0)
         {
-            moveDirection += Vector3.left;
+            _state = State.Walk;
+            _dir = Dir.Down;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (px > 0)
         {
-            moveDirection += Vector3.down;
+            _state = State.Walk;
+            _dir = Dir.Side;
+            spriteRenderer.flipX = false;
         }
-        if (Input.GetKey(KeyCode.D))
+        else if (px < 0)
         {
-            moveDirection += Vector3.right;
+            _state = State.Walk;
+            _dir = Dir.Side;
+            spriteRenderer.flipX = true;
         }
+        else
+        {
+            _state = State.Idle;
+        }
+        Vector3 direction = new Vector3(px, py, 0).normalized;
 
-        transform.position += moveDirection.normalized * moveDistance;
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -10, 10), transform.position.y, transform.position.z);
-    }
-    //collision
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("[Player] OnCollisionEnter2D");
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        Debug.Log("[Player] OnCollisionStay2D");
+        transform.position += direction * speed * time;
+        time = 0;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Debug.Log("[Player] OnCollisionExit2D");
-    }
-    //trigger
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("[Player] OnTriggerEnter2D");
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    void UpdateAnimation()
     {
-        Debug.Log("[Player] OnTriggerStay2D");
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Debug.Log("[Player] OnTriggerExit2D");
+        animator.Play($"{_dir}{_state}");
     }
 }
