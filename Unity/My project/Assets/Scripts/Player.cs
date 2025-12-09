@@ -42,10 +42,9 @@ public class Player : MonoBehaviour
         float inputY = Input.GetAxisRaw("Vertical");
         Vector3 inputVector = new Vector3(inputX, inputY);
 
-        if (inputVector.magnitude > 0)
+        if (inputVector.magnitude > 0 && _state != State.Attack)
         {
             Vector3 direction = inputVector.normalized;
-            _state = State.Walk;
 
             if (direction == Vector3.up)
             {
@@ -65,13 +64,22 @@ public class Player : MonoBehaviour
                 _dir = Dir.Right;
                 spriteRenderer.flipX = false;
             }
-
+            _state = State.Walk;
             transform.position += direction * speed * time;
         }
         else
         {
-            _state = State.Idle;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _state = State.Attack;
+            }
+            else
+            {
+                _state = State.Idle;
+            }
         }
+
+        
 
         time = 0;
     }
@@ -87,5 +95,10 @@ public class Player : MonoBehaviour
         {
             animator.Play($"{_dir}{_state}");
         }
+    }
+
+    void OnAttackEnded()
+    {
+        _state = State.Idle;
     }
 }
