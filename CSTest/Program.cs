@@ -10,6 +10,6 @@ class Program
 {   
     static void Main()
     {
-        Star.RunTest();
+        Truck.RunTest();
     }
 }
