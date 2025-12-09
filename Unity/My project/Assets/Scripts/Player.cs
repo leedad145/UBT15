@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
     {
         if (_dir == Dir.Right || _dir == Dir.Left)
         {
-            animator.Play($"{_dir}Side");
+            animator.Play($"Side{_state}");
         }
         else 
         {
