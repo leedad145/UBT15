@@ -41,6 +41,13 @@ public class Player : MonoBehaviour
     void UpdateInput()
     {
         time = Time.deltaTime;
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _state = State.Attack;
+            return;
+        }
+
         float inputX = Input.GetAxisRaw("Horizontal");
         float inputY = Input.GetAxisRaw("Vertical");
         Vector3 inputVector = new Vector3(inputX, inputY);
@@ -71,14 +78,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _state = State.Attack;
-            }
-            else
-            {
-                _state = State.Idle;
-            }
+            _state = State.Idle;
         }
         time = 0;
     }
