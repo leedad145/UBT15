@@ -1,6 +1,6 @@
 public class NapaCabbage
 {
-    List<(int, int, bool)> K;
+    static List<(int, int, bool)> K;
     public static void RunTest()
     {   
         
@@ -22,48 +22,46 @@ public class NapaCabbage
             string[] pos = Console.ReadLine().Split();
             int posX = int.Parse(pos[0]);
             int posY = int.Parse(pos[1]);
-            K[i] = (posX, posY, false);
+            K.Add((posX, posY, false));
         }
         int totalWorm = 0;
         int worm = 0;
         // 위에서 부터 탐색 처음 배추를 만나면 worm++
         // 주변탐색 후 방문한 곳이 있다면 worm--
         K.Sort();
-        
+        foreach((int, int, bool) k in K)
+        {
+            worm = MDFS(k, ref worm);
+            totalWorm += worm;
+        }
+        Console.Write(worm);
     }
-    int MDFS((int, int, bool) k)
+    static int MDFS((int, int, bool) k, ref int worm)
     {
         for(int i = 0; i < K.Count; i++)
         {
-            if(k == (K[i].Item1, K[i].Item1, false))
+            if(k == (K[i].Item1, K[i].Item2, false))
             {
-                
-                K[i] = (K[i].Item1, K[i].Item1, true);
-                if(K.Contains((K[i].Item1 + 1, K[i].Item1, false)))
+                worm++;
+                K[i] = (K[i].Item1, K[i].Item2, true);
+                if(K.Contains((K[i].Item1 + 1, K[i].Item2, false)))
                 {
-                    MDFS(K);
-                    return -1;
+                    return MDFS((K[i].Item1 + 1, K[i].Item2, false), ref worm) + worm - 1;
                 }
-                if(K.Contains((K[i].Item1 - 1, K[i].Item1, false)))
+                if(K.Contains((K[i].Item1 - 1, K[i].Item2, false)))
                 {
-                    MDFS(K);
-                    return -1;
+                    return MDFS((K[i].Item1 - 1, K[i].Item2, false), ref worm);
                 }
-                else if(K.Contains((K[i].Item1, K[i].Item1 + 1, false)))
+                else if(K.Contains((K[i].Item1, K[i].Item2 + 1, false)))
                 {
-                    MDFS(K);
-                    return -1;
+                    return MDFS((K[i].Item1, K[i].Item2 + 1, false), ref worm) + worm - 1;
                 }
-                else if(K.Contains((K[i].Item1, K[i].Item1 + 1, false)))
+                else if(K.Contains((K[i].Item1, K[i].Item2 + 1, false)))
                 {
-                    MDFS(K);
-                    return -1;
-                }
-                else
-                {
-                    
+                    return MDFS((K[i].Item1, K[i].Item2 + 1, false), ref worm) + worm - 1;
                 }
             }
         }
+        return worm;
     }
 }

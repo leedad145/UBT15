@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 //교과서
 //https://thebook.io/006890/
@@ -10,6 +11,14 @@ class Program
 {   
     static void Main()
     {
-        Truck.RunTest();
+        int c = Add(10, 20);
+        for(int i = 0; i < 10; i++)
+        {
+            Console.WriteLine(i);
+        }
+    }
+    static int Add(int[] numbers)
+    {
+        return numbers.Where()
     }
 }
