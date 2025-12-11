@@ -11,14 +11,9 @@ class Program
 {   
     static void Main()
     {
-        int c = Add(10, 20);
-        for(int i = 0; i < 10; i++)
-        {
-            Console.WriteLine(i);
-        }
+        
+        new NapaCabbage();
+        
     }
-    static int Add(int[] numbers)
-    {
-        return numbers.Where()
-    }
+
 }
