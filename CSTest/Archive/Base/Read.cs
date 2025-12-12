@@ -1,6 +1,6 @@
 public class Read
 {
-    public static void RunTest()
+    public Read()
     {
         /*
         Console.Write("문자열을 입력 해 주세요.: ");

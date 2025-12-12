@@ -1,6 +1,6 @@
 public class StarTree
 {
-    public static void RunTest()
+    public StarTree()
     {
         for (int i = 5; i >= -5; i--)
         {

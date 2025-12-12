@@ -1,6 +1,6 @@
 public class FloatDouble
 {
-    public static void RunTest()
+    public FloatDouble()
     {
         float f = 2.0f;
         double d = 1.1;

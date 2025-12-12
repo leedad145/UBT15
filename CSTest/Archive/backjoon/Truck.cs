@@ -1,6 +1,6 @@
-public class Truck
+public class Truck //2979
 {
-    public static void RunTest()
+    public Truck()
     {
         int[] price = new int[3];
         int[] time = new int[100];

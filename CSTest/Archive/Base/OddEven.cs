@@ -1,6 +1,6 @@
 public class OddEven
 {
-    public static void RunTest()
+    public OddEven()
     {
         /*
         1~10 까지 출력하는데

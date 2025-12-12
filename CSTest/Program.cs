@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿
 //교과서
 //https://thebook.io/006890/
 //노션
@@ -11,9 +9,7 @@ class Program
 {   
     static void Main()
     {
-        
-        new NapaCabbage();
-        
+        // 값이 배열에 있는지 확인
+        // 배열의 인덱스가 n일때 0이면
     }
-
 }

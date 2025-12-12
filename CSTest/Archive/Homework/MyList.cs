@@ -1,6 +1,3 @@
-using System.ComponentModel;
-using System.Data;
-
 public class MyList<T>
 {
     T[] arr = new T[1];

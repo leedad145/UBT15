@@ -1,7 +1,7 @@
 public class RPS
 {
     // 가위 바위 보 게임을 만듭니다.
-    public static void RunTest() 
+    public RPS() 
     {
         Console.WriteLine("==============================================");
         Console.WriteLine("가위 바위 보 게임 (1:가위, 2:바위, 3:보)");

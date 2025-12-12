@@ -1,6 +1,6 @@
 public class NumSwap
 {
-    public static void RunTest()
+    public NumSwap()
     {
         int a = 10;
         int b = 20;

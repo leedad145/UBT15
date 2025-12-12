@@ -1,22 +1,25 @@
 
-public class NapaCabbage
+using System.Diagnostics.CodeAnalysis;
+
+public class NapaCabbage //1012
 {
     static bool[,] visited = new bool[50,50];
     static List<(int, int)> posList = new List<(int, int)>();
-    static int[] totalWorm;
+    int[] totalWorm;
 
     public NapaCabbage()
     {   
         int TC = 0; // 테스트 케이스
         int[] inputInfo = new int[3]; // 가로 세로 배추 갯수
+#pragma warning disable CS8604 // 가능한 null 참조 인수입니다.
         TC = int.Parse(Console.ReadLine());
+#pragma warning restore CS8604 // 가능한 null 참조 인수입니다.
         totalWorm = new int[TC];
 
         for(int tc = 0; tc < TC; tc++)
         {
             string[] str = Console.ReadLine().Split();
 
-            int count = 0;
             for(int i = 0; i < inputInfo.Length; i++)
             {
                 inputInfo[i] = int.Parse(str[i]);

@@ -1,6 +1,6 @@
 public class CharString
 {
-    public static void RunTest()
+    public CharString()
     {
         /*
         char a = 'A';

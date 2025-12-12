@@ -6,7 +6,7 @@ public class OOP
     // 캡슐화: 내부 정보를 숨기고 외부엔 필요한 기능만 공개
     // 상속: 기존 클래스를 물려받아 코드 재사용.
     // 다형성: 같은 함수로 다양한 행동을 할 수 있게함
-    static public void RunTest()
+    static OOP()
     {
         Mage mage = new Mage();
         mage.UseSpecialSkill();

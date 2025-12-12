@@ -1,6 +1,6 @@
 public class OperatorOverloadingExample
 {
-    static public void RunTest()
+    static OperatorOverloadingExample()
     {
         Point ptA = new Point(10, 5);
         Point ptB = new Point(3, 8);

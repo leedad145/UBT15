@@ -1,13 +1,13 @@
-public class Star
+public class SumChar //10808
 {
     //baekjoon
     //1 1 0 0 1 0 0 0 0 1 1 0 0 1 2 0 0 0 0 0 0 0 0 0 0 0
-    public static void RunTest()
+    public SumChar()
     {
         int[] array = new int[26];
 
-        string S = Console.ReadLine();
-        foreach(char c in S)
+        string str = Console.ReadLine();
+        foreach(char c in str)
         {
             array[c - 'a'] += 1;
         }

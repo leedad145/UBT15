@@ -7,7 +7,7 @@ public class EnumDonversionExample
         Autumn,
         Winter
     }
-    public static void RunTest()
+    public EnumDonversionExample()
     {
         Season a = Season.Autumn;
         Console.WriteLine($"Inergral value of {a} is {(int)a}");

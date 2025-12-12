@@ -1,7 +1,7 @@
 
 public class ConsoleRPG
 {
-    static public void RunTest()
+    static ConsoleRPG()
     {
         Player player = new Player("이재영", 100, 10);
         Console.WriteLine($"플레이어 생성: {player.Name}/{player.Hp}/{player.Atk}");

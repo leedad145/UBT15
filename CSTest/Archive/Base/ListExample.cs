@@ -1,6 +1,6 @@
 public class ListExample
 {
-    static public void RunTest()
+    static ListExample()
     {
         List<int> ints = new List<int>();
 

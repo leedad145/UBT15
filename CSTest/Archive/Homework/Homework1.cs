@@ -2,7 +2,7 @@
 public class Homework1
 {
 
-    public static void RunTest()
+    public Homework1()
     {
         Console.WriteLine();question1();
         Console.WriteLine();question2();

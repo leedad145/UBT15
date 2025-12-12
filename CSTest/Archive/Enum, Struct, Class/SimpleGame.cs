@@ -26,7 +26,7 @@ public class SimpleGame
         public int atk;
     }
 
-    static public void RunTest()
+    static SimpleGame()
     {
         ClassType choice = ClassType.None;
 

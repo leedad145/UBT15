@@ -1,6 +1,6 @@
 public class Recursive
 {
-    static public void RunTest()
+    static Recursive()
     {
         Console.WriteLine(Sum(1,6));
     }
