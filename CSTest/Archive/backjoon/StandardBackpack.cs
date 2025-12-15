@@ -1,7 +1,7 @@
-public class StandardBackpack
+public class StandardBackpack //12865
 {
-    static List<(int W, int V)> backpack;
-    static int[,] DP;    // 무게의 최대 가치
+    static List<(int W, int V)>? backpack;
+    static int[,]? DP;
     public StandardBackpack()
     {
         // 무게 W, 가치 V
@@ -18,7 +18,7 @@ public class StandardBackpack
             int V = int.Parse(objInput[1]);
             backpack.Add((W, V));
         }
-        DP = new int[K+1,K+1];
+        DP = new int[K+1,N+1];
         Console.WriteLine(BestValue(K));
     }
     static int BestValue(int maxW, int index = 0)
@@ -27,12 +27,12 @@ public class StandardBackpack
         {
             return DP[maxW,index];
         }
-        if(backpack.Count == index + 1) 
+        if(backpack.Count == index) 
         {
             return 0;
         }
-
-        // 물건 추출;
+        
+        // 물건 추출
         (int W, int V) obj = backpack[index];
 
         // 공간이 있으면 넣을지 말지
@@ -44,12 +44,11 @@ public class StandardBackpack
                 BestValue(maxW, index + 1),                  // 버림
                 obj.V + BestValue(maxW - obj.W, index + 1)   // 넣음
             );
-            return DP[maxW,index];
         }
         else // 공간이 없으면 버린다.
         {
             DP[maxW,index] = BestValue(maxW, index + 1);
-            return DP[maxW,index];
         }
+        return DP[maxW,index];
     }
 }

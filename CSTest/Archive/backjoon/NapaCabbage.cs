@@ -11,9 +11,7 @@ public class NapaCabbage //1012
     {   
         int TC = 0; // 테스트 케이스
         int[] inputInfo = new int[3]; // 가로 세로 배추 갯수
-#pragma warning disable CS8604 // 가능한 null 참조 인수입니다.
         TC = int.Parse(Console.ReadLine());
-#pragma warning restore CS8604 // 가능한 null 참조 인수입니다.
         totalWorm = new int[TC];
 
         for(int tc = 0; tc < TC; tc++)
