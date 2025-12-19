@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {}
+    "C:\\Users\\Monstera\\OneDrive\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {
+    "C:\\Users\\Monstera\\OneDrive\\Desktop\\UBT15\\CSTest\\CSTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
+        "projectUniqueName": "C:\\Users\\Monstera\\OneDrive\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
         "projectName": "CSTest",
-        "projectPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
+        "projectPath": "C:\\Users\\Monstera\\OneDrive\\Desktop\\UBT15\\CSTest\\CSTest.csproj",
         "packagesPath": "C:\\Users\\Monstera\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Monstera\\Desktop\\UBT15\\CSTest\\obj\\",
+        "outputPath": "C:\\Users\\Monstera\\OneDrive\\Desktop\\UBT15\\CSTest\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\Monstera\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
