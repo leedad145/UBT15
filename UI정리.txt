@@ -1,0 +1,5 @@
+UI_Base
+UI_Popup, UI_Scene이 두개는 UI_Base 상속
+Popup은 스택 구조로 늦게 띄운 창을 먼저 없에줌
+팝업UI면 UI_Popup 상속
+씬에 붙어있는 UI면 UI_Scene 상속
