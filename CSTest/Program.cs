@@ -2,8 +2,21 @@
 {
     static void Main()
     {
-        int[] input = Array.ConvertAll(Console.ReadLine().Split(),int.Parse);
-        int output = input[0] + input[1];
-        Console.Write(output);
+        
     }
+}
+
+class Parent
+{
+    public virtual void Foo() {}
+    public virtual void Boo() {}
+}
+class Child : Parent
+{   
+    // {
+    //     public virtual void Foo() {}
+    //     public virtual void Boo() {}
+    // }
+    public override void Foo() {}
+    public override void Boo() {}
 }
