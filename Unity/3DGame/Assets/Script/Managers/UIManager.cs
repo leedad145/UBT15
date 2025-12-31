@@ -6,5 +6,5 @@ public class UIManager : MonoBehaviour
 {
     int order = 0;
 
-    Stack<UI_Popup>
+    //Stack<UI_Popup> popupStack;
 }
