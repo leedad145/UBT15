@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 7f;
     Define.PlayerState _state;
-    PlayerStat _stat = new PlayerStat();
-    public PlayerStat Stat
+    Stat _stat = new Stat();
+    public Stat Stat
     {
         get{return _stat;}
     }
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour
         Managers.Input.OnInputKey += fire;
         Managers.Input.OnInputKey += move;
         Managers.Input.OnInputKey += Attack;
-        _stat.Attack = 10;
     }
 
     void Update()
@@ -45,7 +43,7 @@ public class PlayerController : MonoBehaviour
                 return;
             yVelocity += gravity * Time.deltaTime;
             dir.y = yVelocity;
-            _cc.Move(dir * moveSpeed * Time.deltaTime);
+            _cc.Move(dir * _stat.MoveSpeed * Time.deltaTime);
             _state = Define.PlayerState.Run;
         }
         else
@@ -85,5 +83,10 @@ public class PlayerController : MonoBehaviour
             _state = Define.PlayerState.Attack;
         }
     }
+    
     #endregion Attack
+    public int GetAtkDmg()
+    {
+        return _stat.Attack;
+    }
 }

@@ -6,19 +6,13 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        _stat.MaxHp = 30;
-        _stat.Hp = 30;
-        _stat.Defense = 5;
-    }
-
-    void Update()
-    {
-
-        if (_stat.IsDead)
+        _stat.OnDead += () =>
         {
+            Logger.Log($"{gameObject.name} 사망");
             Destroy(gameObject);
-        }
+        };
     }
+
     void OnTriggerEnter(Collider col)
     {
         GameObject go = col.gameObject;
@@ -26,8 +20,7 @@ public class MonsterController : MonoBehaviour
         {
             GameObject player = GameObject.Find("Player");
             PlayerController pc = player.GetComponent<PlayerController>();
-            _stat.OnAttacked(pc.Stat);
-            Logger.Log($"{gameObject.name}Hp: {_stat.Hp} / {_stat.MaxHp}");
+            _stat.TakeDamage(pc.GetAtkDmg());
         }
     }
 }
