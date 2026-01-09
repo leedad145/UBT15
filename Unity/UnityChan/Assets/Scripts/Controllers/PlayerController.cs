@@ -2,13 +2,14 @@
 // 
 
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     float _speed = 10.0f;
-
+    UI_Inven _Inven;
     private LayerMask mask;
     private Vector3 _destPos;
     Animator _anim;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _anim.SetInteger("State", (int)_state);
+        //_anim.SetInteger("State", (int)_state);
         switch (_state)
         {
             case PlayerState.Die:

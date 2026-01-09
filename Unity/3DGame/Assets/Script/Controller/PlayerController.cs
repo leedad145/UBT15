@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Define.PlayerState _state;
-    Stat _stat = new Stat();
+    Stat _stat = new Stat(1, 100, 10, 5, 5f);
     public Stat Stat
     {
         get{return _stat;}
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         Managers.Input.OnInputKey += fire;
         Managers.Input.OnInputKey += move;
         Managers.Input.OnInputKey += Attack;
+        Managers.Input.OnInputKey += PopupInventory;
     }
 
     void Update()
@@ -88,5 +89,22 @@ public class PlayerController : MonoBehaviour
     public int GetAtkDmg()
     {
         return _stat.Attack;
+    }
+    bool isInventoryOpen = false;
+    public void PopupInventory(Define.InputEvent input)
+    {
+        if (input == Define.InputEvent.KeyPress && Input.GetKeyDown(KeyCode.I))
+        {
+            if (isInventoryOpen)
+            {
+                Managers.UI.ClosePopupUI();
+                isInventoryOpen = false;
+            }
+            else
+            {
+                Managers.UI.ShowSceneUI<Inventory>();
+                isInventoryOpen = true;
+            }
+        }
     }
 }

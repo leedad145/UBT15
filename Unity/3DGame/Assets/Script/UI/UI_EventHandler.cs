@@ -1,15 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_EventHandler : MonoBehaviour, IBeginDragHandler, IDragHandler
+public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
+    public event Action<PointerEventData> OnClickHandler;
+    public event Action<PointerEventData> OnBeginDragHandler;
+    public event Action<PointerEventData> OnDragHandler;
+    public event Action<PointerEventData> OnEndDragHandler;
+    public void OnPointerClick(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        OnClickHandler?.Invoke(eventData);
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        OnBeginDragHandler?.Invoke(eventData);
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        OnDragHandler?.Invoke(eventData);
     }
 
-    void IDragHandler.OnDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        OnEndDragHandler?.Invoke(eventData);
     }
+
+    
 }

@@ -1,4 +1,5 @@
 public class Define {
+    
     public enum InputEvent
     {
         UIEvent,
@@ -25,5 +26,10 @@ public class Define {
         Run,
         Attack,
         Dead = 10,
+    }
+    public enum UIEvent
+    {
+        Click,
+        Drag,
     }
 }

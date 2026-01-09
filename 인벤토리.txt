@@ -91,3 +91,14 @@ public class Inventory : MonoBehaviour {
         itemCache[slot.item.id].Add(slot);
     }
 }
+
+class Inventory{
+	Dictionary<Slot, Count> _InventoryDictionary;
+	void Init();
+	void 
+	
+}
+class Slot{
+	Item; // 아이템 정보
+	Image frame;
+}

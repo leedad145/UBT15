@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
-    Stat _stat = new Stat();
+    Stat _stat = new Stat(1, 50, 5, 2, 3f);
 
     void Start()
     {

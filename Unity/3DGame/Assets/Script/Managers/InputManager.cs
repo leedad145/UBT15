@@ -16,49 +16,49 @@ public sealed class InputManager
     /// </summary>
     public void OnUpdate()
     {
-        // 기본적으로 마우스 이동 알림(원래 동작 유지)
-        OnInputKey?.Invoke(Define.InputEvent.MouseMove);
+        // // 기본적으로 마우스 이동 알림(원래 동작 유지)
+        // OnInputKey?.Invoke(Define.InputEvent.MouseMove);
 
-        // 마우스 우클릭(눌림)
-        if (Input.GetMouseButton(1))
-        {
-            OnInputKey?.Invoke(Define.InputEvent.RPress);
+        // // 마우스 우클릭(눌림)
+        // if (Input.GetMouseButton(1))
+        // {
+        //     OnInputKey?.Invoke(Define.InputEvent.RPress);
 
-            // 우클릭 중 좌클릭이 들어오면 RLClick 이벤트
-            if (Input.GetMouseButtonDown(0))
-            {
-                OnInputKey?.Invoke(Define.InputEvent.RLClick);
-            }
+        //     // 우클릭 중 좌클릭이 들어오면 RLClick 이벤트
+        //     if (Input.GetMouseButtonDown(0))
+        //     {
+        //         OnInputKey?.Invoke(Define.InputEvent.RLClick);
+        //     }
 
-            _rPressed = true;
-            _lPressed = false;
-            return;
-        }
+        //     _rPressed = true;
+        //     _lPressed = false;
+        //     return;
+        // }
 
-        // 마우스 좌클릭(눌림)
-        if (Input.GetMouseButton(0))
-        {
-            OnInputKey?.Invoke(Define.InputEvent.LClick);
-            _lPressed = true;
-            _rPressed = false;
-            return;
-        }
+        // // 마우스 좌클릭(눌림)
+        // if (Input.GetMouseButton(0))
+        // {
+        //     OnInputKey?.Invoke(Define.InputEvent.LClick);
+        //     _lPressed = true;
+        //     _rPressed = false;
+        //     return;
+        // }
 
-        // 우클릭에서 손을 뗀 경우
-        if (_rPressed)
-        {
-            OnInputKey?.Invoke(Define.InputEvent.RUp);
-            _rPressed = false;
-            return;
-        }
+        // // 우클릭에서 손을 뗀 경우
+        // if (_rPressed)
+        // {
+        //     OnInputKey?.Invoke(Define.InputEvent.RUp);
+        //     _rPressed = false;
+        //     return;
+        // }
 
-        // 좌클릭에서 손을 뗀 경우
-        if (_lPressed)
-        {
-            OnInputKey?.Invoke(Define.InputEvent.LUp);
-            _lPressed = false;
-            return;
-        }
+        // // 좌클릭에서 손을 뗀 경우
+        // if (_lPressed)
+        // {
+        //     OnInputKey?.Invoke(Define.InputEvent.LUp);
+        //     _lPressed = false;
+        //     return;
+        // }
 
         // 키 입력(마우스 입력이 없을 때)
         if (Input.anyKey)

@@ -1,7 +1,14 @@
 using UnityEngine;
 
-public class Util
+public static class Util
 {
+    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    {
+        T component = go.GetComponent<T>();
+        if(component == null)
+            component = go.AddComponent<T>();
+        return component;
+    }
     public static GameObject FindChild(GameObject go, string name = null, bool reculsive = false)
     {
         Transform transform = FindChild<Transform>(go, name, reculsive);
