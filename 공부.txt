@@ -8,7 +8,8 @@ https://inf.run/NdtX5
 
 
 
-
+3D shaders begginner
+(https://github.com/lettier/3d-game-shaders-for-beginners)
 11로 시작 (물방울 책으로 해보려 합니다)
 
 왜 12로 안 하는가

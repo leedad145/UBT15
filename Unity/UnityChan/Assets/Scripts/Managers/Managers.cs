@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Managers : MonoBehaviour
@@ -8,10 +9,14 @@ public class Managers : MonoBehaviour
     InputManager _input = new InputManager(); 
     ResourceManager _resource = new ResourceManager();
     UIManager _ui = new UIManager();
-    
+    PoolManager _pool = new PoolManager();
+    DataManager _data = new DataManager();
+
     public static InputManager Input { get { return Instance._input; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static UIManager UI { get { return Instance._ui; } }
+    public static PoolManager Pool { get{ return Instance._pool; } }
+    public static DataManager Data { get{ return Instance._data; } }
 
 	void Start()
     {
@@ -39,6 +44,8 @@ public class Managers : MonoBehaviour
             s_instance._input.Init();
             s_instance._resource.Init();
             s_instance._ui.Init();
+            s_instance._pool.Init();
+            s_instance._data.Init();
         }		
 	}
 }

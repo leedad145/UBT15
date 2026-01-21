@@ -1,7 +1,6 @@
 using System;
-using UnityEngine;
 
-public class Stat : MonoBehaviour
+public class Stat
 {
     private int _hp;
     public event Action OnDead;

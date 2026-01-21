@@ -3,27 +3,10 @@ using UnityEngine;
 public abstract class Controller : MonoBehaviour
 {
     Stat _stat;
-    void Awake()
+    public void Awake()
     {
         _stat = new Stat();
-    }
-    void Start()
-    {
-        _stat.OnDead += OnDead;
-    }
-    public virtual void Attack(float power, string target)
-    {
-        GameObject snowPrefab = Resources.Load<GameObject>("Snow");
-        if (snowPrefab != null)
-        {
-            // Instantiate의 반환값을 사용
-            GameObject snow = Instantiate(snowPrefab);
-            Snow snowComponent = snow.GetComponent<Snow>();
-            if (snowComponent != null)
-            {
-                snowComponent.Init(gameObject.layer, power, transform.position);
-            }
-        }
+        _stat.OnDead += Dead;
     }
     public void Attack(float power)
     {
@@ -42,11 +25,12 @@ public abstract class Controller : MonoBehaviour
     {
         if(gameObject.layer != other.gameObject.layer)
         {
-            gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 100);
+            gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.1f);
+            Debug.Log($"[{gameObject.name}] TakeDmg");
             _stat.Attacked();
         }
     }
-    public virtual void OnDead()
+    public virtual void Dead()
     {
         Destroy(gameObject);
     }

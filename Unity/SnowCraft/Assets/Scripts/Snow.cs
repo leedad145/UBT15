@@ -3,7 +3,7 @@ using UnityEngine;
 public class Snow : MonoBehaviour
 {
     float spd;
-    float lifeTime = 2;
+    float lifeTime = 1f;
     float curTime;
     bool _isAttack = false;
     public void Init(LayerMask layer, float power, Vector3 pos)
@@ -26,7 +26,8 @@ public class Snow : MonoBehaviour
     void MoveSnow()
     {
         curTime += Time.deltaTime;
-        transform.position += Vector3.left * spd * Time.deltaTime * 40f / (1 + curTime * 20);
+        if(curTime < lifeTime - 0.2)
+            transform.position += Vector3.left * spd * Time.deltaTime * 40f / (1 + curTime * 20);
         if(curTime > lifeTime)
         {
             Destroy(gameObject);
@@ -34,7 +35,7 @@ public class Snow : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer != gameObject.layer && other.gameObject.layer != LayerMask.NameToLayer("Default"))
+        if(other.gameObject.layer != gameObject.layer && other.gameObject.name != gameObject.name)
         {
             Debug.Log(other.transform.name);
             _isAttack = true;

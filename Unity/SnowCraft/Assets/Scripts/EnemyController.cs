@@ -4,13 +4,13 @@ public class EnemyController : Controller
 {
     float _moveSpd = 3f;
     float _atkSpd;
-    float _curTime = 0;
+    float _curTime;
     Vector3 _moveDir;
     Vector3 _destPos;
     void Start()
     {
         _destPos = GameObject.Find("Destination").transform.position;
-        _atkSpd = Random.Range(0.5f,2f);
+        name = "Enemy";
     }
 
     void Update()
@@ -21,9 +21,9 @@ public class EnemyController : Controller
         //// 공격 및 방향 설정
         if(_curTime > _atkSpd)
         {
-            Attack(_atkSpd);
+            Attack(_atkSpd * 0.75f);
             _moveDir = SetDirection();
-            _atkSpd = Random.Range(0.5f,2f);
+            _atkSpd = Random.Range(1f,3f);
             _curTime = 0;
         }
     }
