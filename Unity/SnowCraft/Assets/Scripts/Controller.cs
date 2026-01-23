@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Controller : MonoBehaviour
@@ -26,7 +28,6 @@ public abstract class Controller : MonoBehaviour
         if(gameObject.layer != other.gameObject.layer)
         {
             gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.1f);
-            Debug.Log($"[{gameObject.name}] TakeDmg");
             _stat.Attacked();
         }
     }

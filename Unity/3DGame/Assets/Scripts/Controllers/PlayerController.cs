@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Managers.UI.ShowSceneUI<Inventory>();
+            // Managers.UI.ShowSceneUI<Inventory>();
             isInventoryOpen = true;
         }
     }

@@ -1,0 +1,170 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using Unity.Plastic.Newtonsoft.Json;
+using UnityEditor;
+using UnityEngine;
+
+public class DataTransformer : EditorWindow
+{
+#if UNITY_EDITOR
+
+    [MenuItem("Tools/ParseExcel %#K")] // Ctrl + Shift + K
+    public static void ParseExcelDataToJson()
+    {
+        ParseExcelDataToJson<Data.ItemDataLoader, int, Data.ItemData>("Item");
+    }
+
+    private static void ParseExcelDataToJson<Loader, Key, LoaderData>(string filename) where Loader : IDataLoader<Key, LoaderData>, new() where LoaderData : new()
+    {
+        // CSV 파일 경로
+        string excelPath = $"{Application.dataPath}/@ExcelData/{filename}Data.csv";
+        // CSV 파일 검증
+        if (!System.IO.File.Exists(excelPath))
+        {
+            Debug.LogError($"Excel file not found : {excelPath}");
+            return;
+        }
+        // Loader 인스턴스 생성
+        Loader loader = new Loader();
+        // Loader의 리스트 필드 찾기
+        FieldInfo[] FieldInfos = typeof(Loader).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        FieldInfo listField = null;
+
+        foreach (FieldInfo field in FieldInfos)
+        {
+            if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>) &&
+                field.FieldType.GetGenericArguments()[0] == typeof(LoaderData))
+            {
+                listField = field;
+                break;
+            }
+        }
+        
+        if (listField == null)
+        {
+            Debug.LogError($"List<{typeof(LoaderData).Name}> field not found in {typeof(Loader).Name}");
+            return;
+        }
+
+        // Loader 인스턴스의 리스트 가져오기
+        var dataList = listField.GetValue(loader) as System.Collections.IList;
+        if (dataList == null)
+        {
+            Debug.LogError("Failed to get list instance");
+            return;
+        }
+
+        // CSV 파일 읽기
+        string[] lines = System.IO.File.ReadAllLines(excelPath, System.Text.Encoding.UTF8);
+        if (lines.Length < 2)
+        {
+            Debug.LogError("CSV file must have at least a header row and one data row");
+            return;
+        }
+
+        // 헤더 파씽
+        string[] headers = lines[0].Split(',');
+
+        // LoaderData의 필드 정보 가져오기
+        FieldInfo[] fields = typeof(LoaderData).GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+        // 데이터 파씽
+        for (int i = 1; i < lines.Length; i++)
+        {
+            string line = lines[i].Trim(); // 가져온 줄 의 맨앞, 맨뒤 공백 제거 (문자열 중간에 삽입된 공백은 유지)
+            if (string.IsNullOrEmpty(line))
+                continue;
+
+            string[] values = line.Split(",");
+            if (values.Length != headers.Length)
+            {
+                Debug.LogWarning($"Line {i + 1} has mismatched column count. Skipping.");
+                continue;
+            }
+
+            // LoadData 인스턴스 생성
+            LoaderData data = new LoaderData();
+
+            // 필드에 값 할당
+            for (int j = 0; j < headers.Length; j++)
+            {
+                string headerName = headers[j].Trim();
+                string value = values[j].Trim();
+
+                FieldInfo field = null;
+                foreach (FieldInfo f in fields)
+                {
+                    if (f.Name.Equals(headerName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        field = f;
+                    }
+                }
+
+                if (field != null)
+                {
+                    try
+                    {
+                        // 타입에 맞게 변환하여 할당
+                        object convertedValue = ConvertValue(value, field.FieldType);
+                        // 여기서 field는 클래스의 메타데이터임, data라는 객체에서 해당 필드 메타데이터를 찾아서 값을 넣기
+                        field.SetValue(data, convertedValue);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogError($"Error converting field '{headerName}' at line {i + 1}: {ex.Message}");
+                    }
+                }
+            }
+
+            dataList.Add(data);
+        }
+
+        // JSON으로 변환
+        string json = JsonConvert.SerializeObject(loader, Formatting.Indented);
+
+        // JSON 파일 저장 경로
+        string jsonPath = $"{Application.dataPath}/Resources/Data/JsonData/{filename}Data.json";
+
+        // 디렉토리 확인 및 생성
+        string directory = Path.GetDirectoryName(jsonPath);
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        // JSON 파일 저장
+        File.WriteAllText(jsonPath, json, Encoding.UTF8);
+
+        AssetDatabase.Refresh();
+
+        Debug.Log($"Successfully converted {filename}Data.csv to JSON. {dataList.Count} items parsed.");
+        Debug.Log($"Saved to: {jsonPath}");
+    }
+
+    private static object ConvertValue(string value, Type targetType)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return targetType.IsValueType ? Activator.CreateInstance(targetType) : null;
+        }
+
+        if (targetType == typeof(int))
+            return int.Parse(value);
+        else if (targetType == typeof(float))
+            return float.Parse(value);
+        else if (targetType == typeof(double))
+            return double.Parse(value);
+        else if (targetType == typeof(bool))
+            return bool.Parse(value);
+        else if (targetType == typeof(string))
+            return value;
+        else if (targetType.IsEnum)
+            return Enum.Parse(targetType, value);
+        else
+            return Convert.ChangeType(value, targetType);
+    }
+#endif
+}
