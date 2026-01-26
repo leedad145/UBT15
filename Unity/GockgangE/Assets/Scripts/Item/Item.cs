@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// 유니티 에디터 메뉴에서 Item생성
 [CreateAssetMenu(fileName = "New Item", menuName = "Item/New Item")]
 public class Item : ScriptableObject
 {
