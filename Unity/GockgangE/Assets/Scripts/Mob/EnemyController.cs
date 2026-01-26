@@ -34,7 +34,6 @@ public class EnemyController : Mob
                 detectionRange = 10f;
                 SetStatus(15, 5, 1f, 2);
                 break;
-
         }
     }
 

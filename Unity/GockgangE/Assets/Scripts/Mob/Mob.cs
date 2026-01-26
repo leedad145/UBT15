@@ -47,16 +47,17 @@ public class Mob : MonoBehaviour
             Dead();
         }
     }
-    public void SetAnim()
-    {
-        _anim.SetInteger("State", (int)_mobState);
-    }
+    
     public virtual void Dead()
     {
         Debug.Log($"{name}: 죽음");
         _mobState = MobState.Dead;
         SetAnim();
         GameManager.Instance.AddGold(_dropGold);
+    }
+    public void SetAnim()
+    {
+        _anim.SetInteger("State", (int)_mobState);
     }
     public virtual void Move(float x)
     {
@@ -95,11 +96,11 @@ public class Mob : MonoBehaviour
     {
         _mobState = MobState.Attack;
         RaycastHit2D[] boxcastHit = Physics2D.BoxCastAll(
-            col2D.bounds.center,        // 시작 위치 (콜라이더 중심)
+            col2D.bounds.center,         // 시작 위치 (콜라이더 중심)
             size,                                   // 박스 크기
             0f,                                         // 박스 회전 각도
             spriteRenderer.flipX ? -transform.right : transform.right, // 나아가는 방향
-            1,                          // 나아가는 거리
+            1,                           // 나아가는 거리
             LayerMask.GetMask(layerName) // 감지할 레이어
         );
         foreach(var hit in boxcastHit)
