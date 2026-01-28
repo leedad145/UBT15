@@ -1,0 +1,110 @@
+using System.ComponentModel.Design;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
+class Program
+{
+    const int Inf = 987654321;
+    public static void Main()
+    {
+        int[][] graph;
+
+        ConstructGraph();
+
+        Console.WriteLine(GetMinDistance(0, 3));
+        Console.WriteLine(GetAStarDistance(0, 3));
+        /*------------------------------------------------*/
+        void ConstructGraph()
+        {
+            graph = new int[7][];
+
+            graph[0] = new int[] {   0,   7, Inf, Inf,   3,  10, Inf };
+            graph[1] = new int[] {   7,   0,   4,  10,   2,   6, Inf };
+            graph[2] = new int[] { Inf,   4,   0,   2, Inf, Inf, Inf };
+            graph[3] = new int[] { Inf,  10,   2,   0,  11,   9,   4 };
+            graph[4] = new int[] {   3,   2, Inf,  11,   0, Inf,   5 };
+            graph[5] = new int[] {  10,   6, Inf,   9, Inf,   0, Inf };
+            graph[6] = new int[] { Inf, Inf, Inf,   4,   5, Inf,   0 };
+
+        }
+
+        int GetMinDistance(int start, int end) //다익스트라
+        {
+            // start => 각 정점 거리 dist 배열 생성
+            int[] dist = new int[] {Inf, Inf, Inf, Inf, Inf, Inf, Inf};
+            dist[start] = 0;
+            
+            int[] path = new int[7];
+
+            PriorityQueue<int, int> pq = new PriorityQueue<int, int>();
+            pq.Enqueue(start, dist[start]);
+
+            while (pq.Count > 0)
+            {
+                //방문하지 않은 정점 중 가장 짧은 정점을 찾는다.
+                int v = pq.Dequeue();
+
+                
+                for(int next = 0; next < graph.Length; next++)
+                {
+                    int distV = dist[v] + graph[v][next];
+
+                    if(dist[next] > distV)
+                    {
+                        dist[next] = distV;
+                        path[next] = v;
+                        pq.Enqueue(next, dist[next]);
+                    }
+                }
+            }
+            return dist[end];
+        }
+        int GetAStarDistance(int start, int end)
+        {
+            int n = graph.Length;
+            int[] gScore = new int[n]; // 시작점에서 현재 노드까지의 비용
+            Array.Fill(gScore, Inf);
+            gScore[start] = 0;
+
+            // 우선순위 큐 (Item, Priority) -> Priority = fScore (g + h)
+            PriorityQueue<int, int> pq = new PriorityQueue<int, int>();
+            
+            // 시작점 예약: fScore = 0 + Heuristic(start, end)
+            pq.Enqueue(start, gScore[start] + GetHeuristic(start, end));
+
+            while (pq.Count > 0)
+            {
+                int curr = pq.Dequeue();
+
+                // 목표 노드에 도달하면 즉시 반환 (A*의 효율성)
+                if (curr == end)
+                    return gScore[end];
+
+                for (int next = 0; next < n; next++)
+                {
+                    // 연결되지 않은 경로 스킵
+                    if (graph[curr][next] == Inf || graph[curr][next] == 0) continue;
+
+                    int tentativeGScore = gScore[curr] + graph[curr][next];
+
+                    // 더 짧은 경로를 찾았을 때 업데이트
+                    if (tentativeGScore < gScore[next])
+                    {
+                        gScore[next] = tentativeGScore;
+                        // fScore = g(n) + h(n)
+                        int fScore = gScore[next] + GetHeuristic(next, end);
+                        pq.Enqueue(next, fScore);
+                    }
+                }
+            }
+            return gScore[end] == Inf ? -1 : gScore[end];
+        }
+        int GetHeuristic(int node, int goal)
+        {
+            // 예시를 위한 임의의 휴리스틱 값 (목표가 3일 때 각 노드별 남은 예상 거리)
+            // 실제 구현 시에는 노드 간의 실제 거리보다 작거나 같아야(Admissible) 최단 경로를 보장합니다.
+            int[] hValues = { 9, 4, 2, 0, 6, 8, 3 }; 
+            return hValues[node];
+        }
+    }
+}

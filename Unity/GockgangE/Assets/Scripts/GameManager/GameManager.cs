@@ -12,16 +12,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get{ Init(); return _instance;}}
 
     // Gold System
-    public int _gold;
+    public Gold _gold;
     private TextMeshProUGUI _goldText;
     
     public GameObject PlayerPrefab;
     public GameObject GoblinPrefab;
     public GameObject FlyingEyePrefab;
-
-
-
-    // PlayerHpBar System
 
     private Transform _playerTransform;
     private Slider _hpSlider;
@@ -171,16 +167,5 @@ public class GameManager : MonoBehaviour
             if(_hpText != null)
                 _hpText.text = $"{_playerController.Hp} / {_playerController.MaxHp}";
         }
-    }
-    
-    public void AddGold(int gold)
-    {
-        _gold += gold;
-    }
-
-    public void SpendGold(int gold)
-    {
-        _gold -= gold;
-        if (_gold < 0) _gold = 0;
     }
 }

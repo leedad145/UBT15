@@ -53,7 +53,7 @@ public class Mob : MonoBehaviour
         Debug.Log($"{name}: 죽음");
         _mobState = MobState.Dead;
         SetAnim();
-        GameManager.Instance.AddGold(_dropGold);
+        //GameManager.Instance.AddGold(_dropGold);
     }
     public void SetAnim()
     {

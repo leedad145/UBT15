@@ -49,14 +49,14 @@ public class ItemShop : MonoBehaviour
     public bool TryBuyItem(Item item)
     {
         // 골드 확인
-        if (GameManager.Instance._gold < item._price)
+        if (GameManager.Instance._gold._value < item._price)
         {
             Debug.Log("골드 부족!");
             return false;
         }
 
         // 골드 차감
-        GameManager.Instance.SpendGold(item._price);
+        GameManager.Instance._gold.SpendGold(item._price);
 
         // 플레이어 스텟 증가
         PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
