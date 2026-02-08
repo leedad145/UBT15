@@ -46,7 +46,9 @@ public class Inventory
     /// </summary>
     public void PlaceItem(InventoryItem item, int X, int Y)
     {
-        Assert.IsFalse(X < 0 || Y < 0 || X + item.Width > Width || Y + item.Height > Height);
+        if(X < 0 || Y < 0 || X + item.Width > Width || Y + item.Height > Height)
+            return;
+            
         _placements.Add(new ItemPlacement(item, X, Y));
         RebuildItemSlot();
     }

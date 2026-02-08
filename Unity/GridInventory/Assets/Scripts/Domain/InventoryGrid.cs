@@ -10,7 +10,8 @@ public class InventoryGrid : MonoBehaviour
     public float TileSizeWidth { get; private set; } = 64f; // UI 타일의 크기
     public float TileSizeHeight { get; private set; } = 64f; // UI 타일의 크기
 
-    Color _cellColor = new Color(0.5f, 0.5f, 0.5f, 0.3f);
+    Color _cellColor = new Color(0.5f, 0.5f, 0.5f, 0.3f); // 기본
+    Color _invalidCellColor = new Color(1f, 0f, 0f, 0.3f); // 설치 불가능한 셀
 
     void Awake()
     {
@@ -32,7 +33,9 @@ public class InventoryGrid : MonoBehaviour
 
         return _tileGridPosition;
     }
-    #region 디버깅용 (인벤토리에 표시)
+    // 설치 가능하면 초록
+    // 설치 불가능 하면 빨강으로 표시되게 해보자
+
     /// <summary>
     /// inventory 표시
     /// </summary>
@@ -46,7 +49,12 @@ public class InventoryGrid : MonoBehaviour
             for (int x = 0; x < itemSlot.GetLength(1); x++)
             {
                 if (itemSlot[y, x] < 1) continue;
-                CreateMovePredictionCell(x, y);
+
+                if (itemSlot[y, x] < 1) continue;
+                else if (itemSlot[y, x] == 1)
+                    CreateMovePredictionCell(x, y, _cellColor);
+                else
+                    CreateMovePredictionCell(x, y, _invalidCellColor);
             }
         }
     }
@@ -56,7 +64,7 @@ public class InventoryGrid : MonoBehaviour
     /// <summary>
     /// 단일 위치에 예상 셀을 생성합니다.
     /// </summary>
-    private void CreateMovePredictionCell(int x, int y)
+    private void CreateMovePredictionCell(int x, int y, Color cellColor)
     {
         var go = new GameObject($"PredictionCell_{x}_{y}", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
         go.transform.SetParent(RT, false);
@@ -70,7 +78,7 @@ public class InventoryGrid : MonoBehaviour
 
         var img = go.GetComponent<Image>();
         img.raycastTarget = false;
-        img.color = _cellColor;
+        img.color = cellColor;
 
         _predictionCells.Add(go);
     }
@@ -87,5 +95,4 @@ public class InventoryGrid : MonoBehaviour
         }
         _predictionCells.Clear();
     }
-    #endregion
 }

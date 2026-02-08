@@ -1,0 +1,21 @@
+{
+  "data":
+    [ {
+        "item_id": 5113001,
+        "item_name": "Sword",
+        "attack_power": 10,
+        "defense": 0
+    },
+    {
+        "item_id": 11002,
+        "item_name": "Shield",
+        "attack_power": 2,
+        "defense": 15
+    },
+    {
+        "item_id": 11003,
+        "item_name": "Health Potion",
+        "attack_power": 0,
+        "defense": 0,
+    } ]
+}

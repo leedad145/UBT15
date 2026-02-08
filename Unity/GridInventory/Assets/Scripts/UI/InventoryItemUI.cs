@@ -10,7 +10,7 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private RectTransform _rectTransform;
     private InventoryGrid _inventoryGrid;
     private InventoryService _inventoryService;
-    private InventoryItemService _inventoryItemService;
+    private ItemService _inventoryItemService;
 
     private InventoryItem _item;
     public InventoryItem Item => _item;
@@ -48,7 +48,7 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         _item = item;
         _inventoryGrid = ui.InventoryGrid;
         _inventoryService = ui.InventoryService;
-        _inventoryItemService = ui.InventoryItemService;
+        _inventoryItemService = ui.ItemService;
         
         RebuildVisual();
     }
@@ -74,6 +74,13 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (!_dragging) return;
         
         var tilePos = _inventoryGrid.GetTileGridPosition(eventData.position);
+        
+        // 오브젝트가 범위를 벗어나면 이동하지 않음
+        if (tilePos.x < 0 || tilePos.y < 0 || 
+            tilePos.x + _item.Width > _inventoryService.Width || 
+            tilePos.y + _item.Height > _inventoryService.Height)
+            return;
+        
         _inventoryService.MoveItem(_item, tilePos.x, tilePos.y);
 
         RebuildVisual();
@@ -154,8 +161,8 @@ public class InventoryItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         _rectTransform.anchorMin = Vector2.zero;
         _rectTransform.anchorMax = Vector2.zero;
         _rectTransform.pivot = Vector2.zero;
-        _rectTransform.anchoredPosition = new Vector2(x * _inventoryGrid.TileSizeWidth, y * _inventoryGrid.TileSizeWidth);
-        _rectTransform.sizeDelta = new Vector2(_item.Width * _inventoryGrid.TileSizeWidth, _item.Height * _inventoryGrid.TileSizeWidth);
+        _rectTransform.anchoredPosition = new Vector2(x * _inventoryGrid.TileSizeWidth, y * _inventoryGrid.TileSizeHeight);
+        _rectTransform.sizeDelta = new Vector2(_item.Width * _inventoryGrid.TileSizeWidth, _item.Height * _inventoryGrid.TileSizeHeight);
     }
 }
 

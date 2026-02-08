@@ -1,20 +1,26 @@
+using System.Linq;
+using System.Text;
 using UnityEngine;
 
-public class InventoryItemService
+public class ItemService
 {
     /// <summary>
     /// 랜덤 테스트 아이템 데이터를 생성합니다.
     /// </summary>
     public Item MakeRandomItemData()
     {
-        var w = Random.Range(1, 4);
-        var h = Random.Range(1, 4);
-        var style = (ItemStyle)Random.Range(0, 3);
-
-        var typeValues = new[] { ItemType.Helmet, ItemType.Gloves, ItemType.Boots, ItemType.BodyArmor, ItemType.Weapon };
-        var type = typeValues[Random.Range(0, typeValues.Length)];
-
-        return new Item(w, h, style, type);
+        // type, style, w, h, idx
+        string type = "1";
+        string[] style =  new[] { "1", "2", "3" };
+        string[] wh = new[] {"12", "21", "22", "32", "23", "33"};
+        string idx = "001";
+        StringBuilder sb = new StringBuilder();
+        sb.Append(type);
+        sb.Append(style[Random.Range(0, style.Length)]);
+        sb.Append(wh[Random.Range(0, wh.Length)]);
+        sb.Append(idx);
+        int randId = int.Parse(sb.ToString());
+        return new Item(randId);
     }
     /// <summary>
     /// 아이템의 모양을 회전합니다.

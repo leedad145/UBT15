@@ -1,7 +1,7 @@
 public class InventoryService
 {
     private Inventory _inventory;
-    public int[,] Itemslot => _inventory.ItemSlot;
+    public int[,] ItemSlot => _inventory.ItemSlot;
     public int Width { get {return _inventory.Width; } }
     public int Height { get {return _inventory.Height; } }
     public InventoryService(Inventory inventory)

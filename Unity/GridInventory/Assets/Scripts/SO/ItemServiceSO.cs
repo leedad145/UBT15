@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "InventoryItemServiceSO", menuName = "Scriptable Objects/InventoryItemServiceSO")]
-public class InventoryItemServiceSO : ScriptableObject
+public class ItemServiceSO : ScriptableObject
 {
-    public InventoryItemService Service { get; private set; }
+    public ItemService Service { get; private set; }
     public void Init()
     {
-        Service = new InventoryItemService();
+        Service = new ItemService();
     }
 }

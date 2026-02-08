@@ -1,29 +1,57 @@
+using System;
+using NUnit.Framework;
+
 public enum ItemStyle
 {
     None,
     H,
-    S
+    S,
+    T
 }
 public enum ItemType
 {
     None,
-    Helmet,
-    Gloves,
-    Boots,
-    BodyArmor,
-    Weapon,
+    Helmet, // 1
+    Gloves, // 2
+    Boots,  // 3
+    BodyArmor, // 4
+    Weapon, // 5
 }
-public class Item // status, status, type
+public class ItemId : IEquatable<ItemId>
 {
-    public readonly int Width;
-    public readonly int Height;
-    public readonly ItemStyle ItemStyle;
-    public readonly ItemType ItemType;
-    public Item(int width = 3,int height = 3, ItemStyle itemStyle = ItemStyle.None, ItemType itemType = ItemType.None)
+    public readonly int RawId; // int {ItemType}{ItemStyle}{Width}{Height}{Index}
+    public readonly ItemType ItemType;      // 1 ~ 9
+    public readonly ItemStyle ItemStyle;    // 1 ~ 9
+    public readonly int Width;              // 1 ~ 9
+    public readonly int Height;             // 1 ~ 9
+    public readonly int Index;              // 1 ~ 999
+
+
+    public ItemId(int id)
     {
-        Width = width;
-        Height = height;
-        ItemStyle = itemStyle;
-        ItemType = itemType;
+        Assert.IsTrue(id.ToString().Length == 7);
+        RawId = id;
+        ItemType = (ItemType)(id / 1000000 % 10);
+        ItemStyle = (ItemStyle)(id / 100000 % 10);
+        Width = id / 10000 % 10;
+        Height = id / 1000 % 10;
+        Index = id % 1000;
+    }
+
+    public bool Equals(ItemId other)
+    {
+        return RawId == other.RawId;
+    }
+}
+public class Item : Entity<ItemId>
+{
+    public readonly string name;
+    public readonly Status status;
+    public int[,] GridShape { get; private set; } // [y,x]
+
+    public Item(int id) : base(new ItemId(id))
+    {
+        name = "name";
+        status = new Status(10, 10);
     }
 }

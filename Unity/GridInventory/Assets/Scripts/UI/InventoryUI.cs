@@ -11,9 +11,9 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("Service SO")]
     [SerializeField] private InventoryServiceSO _inventoryServiceSO;
-    [SerializeField] private InventoryItemServiceSO _inventoryItemServiceSO;
+    [SerializeField] private ItemServiceSO _itemServiceSO;
     public InventoryService InventoryService => _inventoryServiceSO.Service;
-    public InventoryItemService InventoryItemService => _inventoryItemServiceSO.Service;
+    public ItemService ItemService => _itemServiceSO.Service;
 
     [Header("Grid")]
     [SerializeField] private InventoryGrid _inventoryGrid;
@@ -29,6 +29,7 @@ public class InventoryUI : MonoBehaviour
 
     void Update()
     {
+        _inventoryGrid.ShowInventoryGrid(InventoryService.ItemSlot);
         if (Input.GetMouseButtonDown(0))
         {
             var tile = _inventoryGrid.GetTileGridPosition(Input.mousePosition);
@@ -47,9 +48,9 @@ public class InventoryUI : MonoBehaviour
     private void TryPlaceRandomTestItem(int x, int y)
     {
         // 간단 테스트 데이터(원하면 여기만 바꿔서 다양한 아이템 시험 가능)
-        var itemData = InventoryItemService.MakeRandomItemData();
-        var item = new InventoryItem(itemData);
-        TrySpawnItemUI(item, x, y);
+        var item = ItemService.MakeRandomItemData();
+        var invenItem = new InventoryItem(item);
+        TrySpawnItemUI(invenItem, x, y);
     }
     /// <summary>
     /// 지정좌표에 아이템을 소환합니다.
