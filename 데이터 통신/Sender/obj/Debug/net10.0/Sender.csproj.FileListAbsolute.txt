@@ -1,0 +1,15 @@
+C:\UBT15\데이터 통신\Sender\bin\Debug\net10.0\Sender.exe
+C:\UBT15\데이터 통신\Sender\bin\Debug\net10.0\Sender.deps.json
+C:\UBT15\데이터 통신\Sender\bin\Debug\net10.0\Sender.runtimeconfig.json
+C:\UBT15\데이터 통신\Sender\bin\Debug\net10.0\Sender.dll
+C:\UBT15\데이터 통신\Sender\bin\Debug\net10.0\Sender.pdb
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.GeneratedMSBuildEditorConfig.editorconfig
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.AssemblyInfoInputs.cache
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.AssemblyInfo.cs
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.csproj.CoreCompileInputs.cache
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.sourcelink.json
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.dll
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\refint\Sender.dll
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.pdb
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\Sender.genruntimeconfig.cache
+C:\UBT15\데이터 통신\Sender\obj\Debug\net10.0\ref\Sender.dll
