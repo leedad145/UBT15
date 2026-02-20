@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Initializer : MonoBehaviour
 {
-    [SerializeField] ItemServiceSO _inventoryItemServiceSO;
-    [SerializeField] InventoryServiceSO _inventoryServiceSO;
+    [SerializeField] InventoryServiceLocateSO _inventoryServiceSO;
+    [SerializeField] InventoryRepositorySO _inventoryRepositorySO;
     void Awake()
     {
-        _inventoryItemServiceSO.Init();
-        _inventoryServiceSO.Init();
+        _inventoryRepositorySO.Init();
+        _inventoryServiceSO.Init(_inventoryRepositorySO.Repository);
     }
 }

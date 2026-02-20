@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af31845da7761324c88bddb45759fde0, type: 3}
   m_Name: InventoryServiceSO
   m_EditorClassIdentifier: Assembly-CSharp::InventoryServiceSO
-  width: 10
-  height: 6
+  _inventoryItemServiceLocateSO: {fileID: 0}
+  _width: 0
+  _height: 0

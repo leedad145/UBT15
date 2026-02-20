@@ -1,6 +1,7 @@
 using System;
+using System.Text;
 using NUnit.Framework;
-
+using Random = UnityEngine.Random;
 public enum ItemStyle
 {
     None,
@@ -42,16 +43,31 @@ public class ItemId : IEquatable<ItemId>
     {
         return RawId == other.RawId;
     }
+    public static ItemId GetRandomItemId()
+    {
+        // type, style, w, h, idx
+        string type = "1";
+        string[] style =  new[] { "1", "2", "3" };
+        string[] wh = new[] {"12", "21", "22", "32", "23", "33"};
+        string idx = "001";
+        StringBuilder sb = new StringBuilder();
+        sb.Append(type);
+        sb.Append(style[Random.Range(0, style.Length)]);
+        sb.Append(wh[Random.Range(0, wh.Length)]);
+        sb.Append(idx);
+        int randId = int.Parse(sb.ToString());
+        return new ItemId(randId);
+    }
 }
 public class Item : Entity<ItemId>
 {
-    public readonly string name;
-    public readonly Status status;
+    public readonly string Name;
+    public readonly Status Stat;
     public int[,] GridShape { get; private set; } // [y,x]
 
-    public Item(int id) : base(new ItemId(id))
+    public Item(int id, string name, Status stat) : base(new ItemId(id))
     {
-        name = "name";
-        status = new Status(10, 10);
+        Name = name;
+        Stat = stat;
     }
 }

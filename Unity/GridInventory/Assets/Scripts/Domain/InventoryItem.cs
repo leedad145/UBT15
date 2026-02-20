@@ -1,18 +1,20 @@
-public class InventoryItem
+using System;
+
+public class InventoryItem : Entity<long>
 {
-    Item _item;
-    ItemId _id => _item.Id;
+    public long SerialNumber => Id;
+    public ItemId ItemId { get; }
     
     public int[,] GridShape { get; private set; } // [y,x]
     public int Height { get {return GridShape.GetLength(0); } } 
     public int Width { get {return GridShape.GetLength(1); } }
-    public InventoryItem(Item item)
+    public InventoryItem(long serialNumber, ItemId itemId) : base(serialNumber)
     {
-        _item = item;
-        GridShape = new int[_id.Height, _id.Width];
-        switch (_id.ItemStyle)
+        ItemId = itemId;
+        GridShape = new int[ItemId.Height, ItemId.Width];
+        switch (ItemId.ItemStyle)
         {
-        /*  
+        /*
         width 3 height 3 style None
         [1][1][1]
         [1][1][1]
@@ -32,40 +34,59 @@ public class InventoryItem
         */
             case ItemStyle.None:
             default:
-                for (int y = 0; y < _id.Height; y++)
-                    for (int x = 0; x < _id.Width; x++)
+                for (int y = 0; y < ItemId.Height; y++)
+                    for (int x = 0; x < ItemId.Width; x++)
                         GridShape[y, x] = 1;
                 break;
             case ItemStyle.H:
-                for (int x = 0; x < _id.Width; x++)
-                    GridShape[_id.Height / 2, x] = 1;
+                for (int x = 0; x < ItemId.Width; x++)
+                    GridShape[ItemId.Height / 2, x] = 1;
 
-                for (int y = 0; y < _id.Height; y++)
+                for (int y = 0; y < ItemId.Height; y++)
                 {
                     GridShape[y, 0] = 1;
-                    GridShape[y, _id.Width - 1] = 1;
+                    GridShape[y, ItemId.Width - 1] = 1;
                 }
                 break;
             case ItemStyle.S:
-                for (int x = 0; x < _id.Width; x++)
+                for (int x = 0; x < ItemId.Width; x++)
                 {
-                    if(x <= _id.Width / 2)
-                        GridShape[_id.Height - 1, x] = 1;
+                    if(x <= ItemId.Width / 2)
+                        GridShape[ItemId.Height - 1, x] = 1;
                     else
                         GridShape[0, x] = 1;
                 }
-                for (int y = 0; y < _id.Height; y++)
-                    GridShape[y, _id.Width / 2] = 1;
+                for (int y = 0; y < ItemId.Height; y++)
+                    GridShape[y, ItemId.Width / 2] = 1;
                 break;
             case ItemStyle.T:
-                for (int x = 0; x < _id.Width; x++)
+                for (int x = 0; x < ItemId.Width; x++)
                     GridShape[0, x] = 1;
-                for (int y = 0; y < _id.Height; y++)
-                    GridShape[y, _id.Width / 2] = 1;
+                for (int y = 0; y < ItemId.Height; y++)
+                    GridShape[y, ItemId.Width / 2] = 1;
                 break;
         }
     }
-
+    public static InventoryItem Create(ItemId itemId)
+    {
+        Random randomGenerator = new Random();
+        long serialNumber = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss") + randomGenerator.Next(9999).ToString("D4"));
+        
+        return new InventoryItem(serialNumber, itemId);
+    }
+    public void Rotate(bool dir = true)
+    {
+        if (dir)
+        {
+            Perform90DegreeRotation();
+        }
+        else
+        {
+            Perform90DegreeRotation();
+            Perform90DegreeRotation();
+            Perform90DegreeRotation();
+        }
+    }
     public void Perform90DegreeRotation()
     {
         int[,] next = new int[Width, Height];

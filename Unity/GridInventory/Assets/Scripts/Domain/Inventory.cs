@@ -1,46 +1,47 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using Unity.Mathematics;
+public readonly struct ItemPlacement // 저장
+{
+    public readonly InventoryItem Item;
+    // 시작 좌표
+    public readonly int X; 
+    public readonly int Y;
 
-/*
-아이템 배치, 제거
-아이템 회전
-*/
+    public ItemPlacement(InventoryItem item, int x, int y)
+    {
+        Item = item;
+        X = x;
+        Y = y;
+    }
+}
 public class Inventory
 {
     public int Width { get; private set; }
     public int Height { get; private set; }
-    public int[,] ItemSlot { get; private set; }
+    public int[,] ItemSlot { get; private set; } // 보여주기용
     public bool HasOverlap => ItemSlot.Cast<int>().Any(slot => slot > 1);
-    public readonly struct ItemPlacement // 저장
-    {
-        public readonly InventoryItem Item;
-        // 시작 좌표
-        public readonly int X; 
-        public readonly int Y;
-
-        public ItemPlacement(InventoryItem item, int x, int y)
-        {
-            Item = item;
-            X = x;
-            Y = y;
-        }
-    }
 
     // 아이템이 "어디에 놓였는지"를 저장(드래그 이동/좌표 역추적용)
-    private readonly List<ItemPlacement> _placements = new List<ItemPlacement>();
+    private readonly List<ItemPlacement> _placements; //실제 상태
     public IReadOnlyList<ItemPlacement> Placements => _placements;
 
-    public Inventory(int width, int height)
+    public Inventory(int width, int height, List<ItemPlacement> placements = null)
     {
         Width = width;
         Height = height;
         // [y, x] 순서로 접근하므로 [Height, Width]로 생성해야 안전함
         ItemSlot = new int[Height, Width];
-    }
 
+        if(placements == null)
+            _placements = new List<ItemPlacement>();
+        else    
+            _placements = placements;
+    }
+    public static Inventory CreateEmpty(int width, int height)
+    {
+        return new Inventory(width, height);
+    }
     /// <summary>
     /// 아이템을 인벤토리의 지정된 위치에 배치합니다. _placements에만 추가하고, ItemSlot은 RebuildItemSlot()을 호출하여 업데이트합니다.
     /// </summary>
@@ -60,10 +61,10 @@ public class Inventory
             if (_placements[i].Item == item)
             {
                 _placements.RemoveAt(i);
+                RebuildItemSlot();
                 break;
             }
         }
-        RebuildItemSlot();
     }
     /// <summary>
     /// 지정된 위치의 아이템을 제거합니다. _placements에서만 제거하고, ItemSlot은 RebuildItemSlot()을 호출하여 업데이트합니다.
@@ -75,20 +76,20 @@ public class Inventory
             if (_placements[i].Item == item)
             {
                 _placements.RemoveAt(i);
+                RebuildItemSlot();
                 break;
             }
         }
-        RebuildItemSlot();
     }
 
     /// <summary>
     /// 지정된 inventory좌표에 있는 아이템을 찾습니다.
     /// </summary>
-    public InventoryItem GetItemAt(int x, int y)
+    public InventoryItem? GetItemAt(int x, int y)
     {
-        // 유효성 확인
-        Assert.IsFalse(x < 0 || y < 0 || x >= Width || y >= Height);
-        Assert.IsFalse(ItemSlot[y, x] <= 0);
+        // 범위 체크: 범위 밖이면 null 반환
+        if(x < 0 || y < 0 || x >= Width || y >= Height)
+            return null;
 
         // _placements에서 이 좌표를 실제로 덮는 아이템 찾기
         foreach (var placement in _placements)
@@ -108,6 +109,12 @@ public class Inventory
 
         return null;
     }
+
+    /// <summary>
+    /// 지정된 위치에 아이템을 배치할 수 있는지 확인합니다.
+    /// </summary>
+    public bool IsValidPosition(InventoryItem item, int x, int y)
+        => !(x < 0 || y < 0 || x + item.Width > Width || y + item.Height > Height);
 
     /// <summary>
     /// 아이템의 현재 위치를 가져옵니다.
